@@ -25,6 +25,7 @@ group :test do
   gem 'faker'
   gem 'minitest'
   gem 'minitest-reporters'
+  gem 'rails-controller-testing'
 end
 
 group :development do
