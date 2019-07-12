@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_092026) do
+ActiveRecord::Schema.define(version: 2019_07_12_095718) do
+
+  create_table "learn_resources", force: :cascade do |t|
+    t.string "title"
+    t.integer "user_id"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_learn_resources_on_user_id"
+  end
+
+  create_table "learn_resources_topics", id: false, force: :cascade do |t|
+    t.integer "learn_resource_id", null: false
+    t.integer "topic_id", null: false
+    t.index ["learn_resource_id", "topic_id"], name: "index_learn_resources_topics_on_learn_resource_id_and_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "titl"
+    t.integer "unit_id"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_topics_on_unit_id"
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string "title"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
