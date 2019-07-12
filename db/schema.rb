@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_095718) do
+ActiveRecord::Schema.define(version: 2019_07_12_105818) do
 
   create_table "learn_resources", force: :cascade do |t|
     t.string "title"
@@ -21,14 +21,17 @@ ActiveRecord::Schema.define(version: 2019_07_12_095718) do
     t.index ["user_id"], name: "index_learn_resources_on_user_id"
   end
 
-  create_table "learn_resources_topics", id: false, force: :cascade do |t|
-    t.integer "learn_resource_id", null: false
-    t.integer "topic_id", null: false
-    t.index ["learn_resource_id", "topic_id"], name: "index_learn_resources_topics_on_learn_resource_id_and_topic_id"
+  create_table "tip_topics", force: :cascade do |t|
+    t.integer "learn_resource_id"
+    t.integer "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["learn_resource_id"], name: "index_tip_topics_on_learn_resource_id"
+    t.index ["topic_id"], name: "index_tip_topics_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
-    t.string "titl"
+    t.string "title"
     t.integer "unit_id"
     t.integer "order"
     t.datetime "created_at", null: false
@@ -47,10 +50,10 @@ ActiveRecord::Schema.define(version: 2019_07_12_095718) do
     t.string "name"
     t.string "email"
     t.string "github_username"
-    t.string "password"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
