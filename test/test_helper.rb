@@ -6,16 +6,23 @@ Minitest::Reporters.use!
 [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::ProgressReporter.new]
 
 class ActiveSupport::TestCase
-
   fixtures :all
   #For model tests to test presence of required attribute
-  def missing_data_assertion(object_attr, class_name)
-    #create instance of class 
-    class_instance = class_name.constantize.new
-    #set desired prop to be equal to ''
-    class_instance[object_attr] = ''
-    sym = object_attr.to_sym
-    refute class_instance.valid?, "user is invalid without #{object_attr}"
-    assert_not_nil class_instance.errors[sym], "no validation error for #{object_attr} present"
+  def missing_data_assertion(instance_var, class_instance)
+    class_instance[instance_var] = ''
+    sym = instance_var.to_sym
+    refute class_instance.valid?, "user is invalid without #{instance_var}"
+    assert_not_nil class_instance.errors[sym], "no validation error for #{instance_var} present"
   end 
+
+  def entry_valid?(item, class_instance, instance_var)
+      class_instance[instance_var] = item
+      assert class_instance.valid?, "#{item.inspect} should be valid"
+  end
+
+  def entry_invalid?(item, class_instance, instance_var)
+    class_instance[instance_var] = item
+    assert_not class_instance.valid?, "#{item.inspect} should not be valid"
+  end
+
 end
