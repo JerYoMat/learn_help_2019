@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-
+require 'pry'
 def test_user_missing(object_attr)
   missing_data_assertion(object_attr, @user)
 end
@@ -32,10 +32,6 @@ class UserTest < ActiveSupport::TestCase
     test_user_missing('github_username')
   end
 
-  test 'user requires password' do
-    test_user_missing('password')
-  end
-  
   test 'email should not be too long' do
     @user.email = 'a' * 246 + '.email.com'
     assert_not @user.valid?
