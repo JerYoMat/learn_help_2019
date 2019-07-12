@@ -4,9 +4,13 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/reporters'
+
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
+
+  fixtures :all
+  
   def missing_data_assertion(instance_var, class_instance)
     class_instance[instance_var] = ''
     sym = instance_var.to_sym
@@ -23,4 +27,6 @@ class ActiveSupport::TestCase
     class_instance[instance_var] = item
     assert_not class_instance.valid?, "#{item.inspect} should not be valid"
   end
+
+
 end
