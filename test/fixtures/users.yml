@@ -1,0 +1,13 @@
+test_user1:
+  name: UserOne
+  email: First@test.com
+  github_username: TestyGit
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: true
+
+test_user2:
+  name: UserTwo
+  email: Second@test.com
+  github_username: OtherGit
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: true  
